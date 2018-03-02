@@ -5,7 +5,12 @@ using BuilderForm.Data.Entities;
 
 namespace BuilderForm.DataService
 {
-    interface IFormAnswerService
+    public interface IFormAnswerService
     {
+        IEnumerable<FormAnswer> GetFormAnswersByFormId(Guid formId);
+        FormAnswer GetFormAnswerById(int id);
+        bool Add(FormAnswer formAnswer);
+        bool Update(FormAnswer formAnswer);
+        bool Delete(int id);
     }
 }
