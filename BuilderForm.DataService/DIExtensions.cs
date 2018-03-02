@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BuilderForm.DataService
+namespace BuilderForm
 {
     public static class DIExtensions
     {
