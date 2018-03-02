@@ -6,5 +6,10 @@ namespace BuilderForm.Data.Entities
 {
     public class FormAnswer : BaseEntity<int>
     {
+        public int FormId { get; set; }
+        public string Answer { get; set; }
+
+        //Relations
+        public virtual Form Form { get; set; }
     }
 }
