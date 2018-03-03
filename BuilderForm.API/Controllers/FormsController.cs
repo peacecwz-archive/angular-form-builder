@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BuilderForm.API.Helpers;
 using BuilderForm.API.Models.Forms;
+using BuilderForm.Data.Entities;
+using BuilderForm.DataService;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +15,27 @@ namespace BuilderForm.API.Controllers
     [Route("api/v1/forms")]
     public class FormsController : ApiController
     {
+        private readonly IFormService formService;
+
+        public FormsController(IFormService formService)
+        {
+            this.formService = formService;
+        }
+
+
         [Route("create")]
         [HttpPost]
-        public IActionResult Create([FromBody]CreateFormModel form)
+        public IActionResult Create([FromBody]CreateFormModel model)
         {
-            return Ok();
+            var form = new Form()
+            {
+                FormSchema = model.FormSchema,
+                Name = model.FormName,
+                Url = model.FormName.GetFriendlyUrl()
+            };
+            if (formService.Add(form))
+                return Ok(form.Id);
+            return BadRequest();
         }
 
         [Route("get/{id}")]

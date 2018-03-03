@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuilderForm.DataService\BuilderForm.DataService.csproj" />
     <ProjectReference Include="..\BuilderForm.Repository\BuilderForm.Repository.csproj" />
   </ItemGroup>
 
