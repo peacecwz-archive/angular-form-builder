@@ -43,7 +43,7 @@ namespace BuilderForm.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Forms}/{action=Create}/{id?}");
             });
         }
     }

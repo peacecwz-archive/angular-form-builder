@@ -1,7 +1,10 @@
-﻿@{
-	ViewData["Title"] = "Home Page";
+﻿
+@{
+	ViewData["Title"] = "Create";
 }
-<div ng-controller="DemoController">
+
+
+<div ng-controller="CreateFormController">
 
 	<div class="row">
 		<h1>Form Builder</h1>
@@ -10,7 +13,10 @@
 		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
-					<h3 class="panel-title pull-left" style="padding-top: 7.5px;">Form Builder</h3>
+					<h3 class="panel-title pull-left" style="padding-top: 7.5px;">
+						<input type="text" ng-model="formName" ng-init="formName='Form 1'" />
+
+					</h3>
 					<div class="dropdown pull-right">
 						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 							Add Control
@@ -37,9 +43,16 @@
 				</div>
 				<div fb-builder="default"></div>
 				<div class="panel-footer">
-					<button ng-click="createForm()" class="btn btn-default" type="button">
-						Create Form
-					</button>
+					<div class="row">
+						<button ng-click="createForm()" class="btn btn-default" type="button">
+							Create Form
+						</button>
+					</div>
+					<div class="row" ng-if="isSuccess">
+						Created Successfull<br />
+						<pre>{{formUrl}}</pre>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -57,24 +70,6 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<h2>Form</h2>
-		<hr>
-		<form class="form-horizontal">
-			<div ng-model="input" fb-form="default" fb-default="defaultValue"></div>
-			<div class="form-group">
-				<div class="col-md-8 col-md-offset-4">
-					<input type="submit" ng-click="submit()" class="btn btn-default" />
-				</div>
-			</div>
-		</form>
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" ng-model="isShowScope" ng-init="isShowScope=true" /> Show scope
-			</label>
-		</div>
-		<pre ng-if="isShowScope">{{input}}</pre>
-	</div>
 
 	<div class="row">
 		<div class="col-md-12 footer"></div>

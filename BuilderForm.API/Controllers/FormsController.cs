@@ -13,7 +13,7 @@ namespace BuilderForm.API.Controllers
     {
         [Route("create")]
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(string json)
         {
             return Ok();
         }
