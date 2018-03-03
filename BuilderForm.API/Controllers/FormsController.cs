@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BuilderForm.API.Helpers;
+using BuilderForm.API.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuilderForm.API.Controllers
@@ -13,7 +14,7 @@ namespace BuilderForm.API.Controllers
     {
         [Route("create")]
         [HttpPost]
-        public IActionResult Create(string json)
+        public IActionResult Create([FromBody]CreateFormModel form)
         {
             return Ok();
         }
