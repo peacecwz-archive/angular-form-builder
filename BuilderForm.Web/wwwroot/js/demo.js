@@ -1,6 +1,11 @@
 (function () {
     var baseUrl = 'http://localhost:51468/';
-    var baseApiUrl = 'http://localhost:50730';
+    var baseApiUrl = 'http://localhost:50730/api/v1';
+    var config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
     angular
         .module("app", ["ngRoute", "builder", "builder.components", "validator.rules"])
         .config(['$routeProvider', function ($routeProvider) {
@@ -48,13 +53,21 @@
                 $scope.defaultValue = {};
                 $scope.formUrl = 'https://facebook.com';
                 $scope.isSuccess = true;
+                $scope.formName = '';
 
                 $scope.createForm = function () {
-                    $http.post(baseApiUrl + '/api/forms/create', $scope.form).success(function (response) {
-                        console.log(response);
-                        $scope.isSuccess = true;
-                        $scope.formUrl = '#/';
-                    });
+                    $http.post(baseApiUrl + '/forms/create',
+                        {
+                            FormName: $scope.formName,
+                            FormSchema: JSON.stringify($scope.form)
+                        },
+                        config).then(function (response) {
+                            console.log(response);
+                            $scope.isSuccess = true;
+                            $scope.formUrl = '#/';
+                        }).then(function (err) {
+                            console.log(err)
+                        });
                 };
 
                 $scope.addComponent = function (type) {

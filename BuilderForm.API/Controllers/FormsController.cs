@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BuilderForm.API.Helpers;
 using BuilderForm.API.Models.Forms;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuilderForm.API.Controllers

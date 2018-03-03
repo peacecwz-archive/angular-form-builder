@@ -16,7 +16,8 @@ namespace BuilderForm.API.Helpers
         public override OkResult Ok()
         {
             IActionResult result = StatusCode(200, new APIResponse(true));
-            return result as OkResult;
+            
+            return base.Ok();
         }
 
         [NonAction]

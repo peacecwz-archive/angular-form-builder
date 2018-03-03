@@ -21,6 +21,7 @@ namespace BuilderForm.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
         }
 
@@ -37,6 +38,7 @@ namespace BuilderForm.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

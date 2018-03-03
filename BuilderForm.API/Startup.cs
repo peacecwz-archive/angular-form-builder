@@ -30,6 +30,7 @@ namespace BuilderForm.API
                 options.UseNpgsql(Configuration.GetConnectionString("FormBuilderConnectionString"),
                     builder => builder.MigrationsAssembly("BuilderForm.API"));
             });
+            services.AddCors();
             services.AddMvc();
         }
 
@@ -40,6 +41,8 @@ namespace BuilderForm.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseMvc();
         }
