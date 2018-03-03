@@ -1,0 +1,83 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+<div ng-controller="DemoController">
+
+	<div class="row">
+		<h1>Form Builder</h1>
+		<hr>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left" style="padding-top: 7.5px;">Form Builder</h3>
+					<div class="dropdown pull-right">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+							Add Control
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a ng-click="addComponent('input')" href="#">Text Input</a>
+							</li>
+							<li>
+								<a ng-click="addComponent('textarea')" href="#">Text Area</a>
+							</li>
+							<li>
+								<a ng-click="addComponent('checkbox')" href="#">Checkbox</a>
+							</li>
+							<li>
+								<a ng-click="addComponent('radio')" href="#">Radio</a>
+							</li>
+							<li>
+								<a ng-click="addComponent('select')" href="#">Select</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div fb-builder="default"></div>
+				<div class="panel-footer">
+					<button ng-click="createForm()" class="btn btn-default" type="button">
+						Create Form
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">Form Components</h3>
+					<div class="dropdown pull-right">
+						<input type="checkbox" ng-model="isShowComponents" ng-init="isShowComponents=false" /> Show Components
+					</div>
+				</div>
+				<div ng-show="isShowComponents" fb-components></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<h2>Form</h2>
+		<hr>
+		<form class="form-horizontal">
+			<div ng-model="input" fb-form="default" fb-default="defaultValue"></div>
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-4">
+					<input type="submit" ng-click="submit()" class="btn btn-default" />
+				</div>
+			</div>
+		</form>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="isShowScope" ng-init="isShowScope=true" /> Show scope
+			</label>
+		</div>
+		<pre ng-if="isShowScope">{{input}}</pre>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 footer"></div>
+	</div>
+
+</div>
