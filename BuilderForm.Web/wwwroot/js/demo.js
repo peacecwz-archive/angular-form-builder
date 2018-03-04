@@ -29,7 +29,7 @@
                 });
         }])
         .run()
-        .controller("FormController", ['$scope', '$builder', '$validator', function ($scope, $builder, $validator) {
+        .controller("FormController", ['$scope', '$builder', '$validator', '$http', '$routeParams', function ($scope, $builder, $validator, $http, $routeParams) {
 
             return ($scope.submit = function () {
                 return $validator
@@ -56,6 +56,10 @@
                 $scope.formName = '';
 
                 $scope.createForm = function () {
+                    console.log(JSON.stringify({
+                        FormName: $scope.formName,
+                        FormSchema: JSON.stringify($scope.form)
+                    }));
                     $http.post(baseApiUrl + '/forms/create',
                         {
                             FormName: $scope.formName,
