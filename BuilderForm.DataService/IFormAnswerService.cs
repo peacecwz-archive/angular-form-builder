@@ -7,7 +7,7 @@ namespace BuilderForm.DataService
 {
     public interface IFormAnswerService
     {
-        IEnumerable<FormAnswer> GetFormAnswersByFormId(Guid formId);
+        IEnumerable<FormAnswer> GetFormAnswersByKey(Guid key);
         FormAnswer GetFormAnswerById(int id);
         bool Add(FormAnswer formAnswer);
         bool Update(FormAnswer formAnswer);

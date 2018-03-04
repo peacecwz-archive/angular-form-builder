@@ -1,4 +1,4 @@
-
+var isLoaded = false;
 var baseUrl = 'http://localhost:51468/';
 var baseApiUrl = 'http://localhost:50730/api/v1';
 var config = {
@@ -9,7 +9,7 @@ var config = {
 angular
     .module("app", ["ngRoute", "builder", "builder.components", "validator.rules"])
     .config([
-        '$routeProvider', function ($routeProvider) {
+        '$routeProvider', '$routeProvider', function ($routeProvider, $routeProvider) {
             $routeProvider
                 .when('/create',
                 {
@@ -24,7 +24,7 @@ angular
                 .when('/answers/:key',
                 {
                     controller: 'FormAnswersController',
-                    templateUrl: 'forms/answers'
+                    templateUrl: 'Forms/GetAnswers'
                 }).otherwise({
                     redirectTo: '/create'
                 });
@@ -35,15 +35,18 @@ angular
     [
         '$scope', '$builder', '$validator', '$http', '$routeParams',
         function ($scope, $builder, $validator, $http, $routeParams) {
-            $scope.form = $builder.forms["default"];
             $scope.input = [];
-
+            $scope.formName = "Form";
+            $scope.title = $scope.formName; 
             $http.get(baseApiUrl + "/forms/get/" + $routeParams.id)
                 .then(function (response) {
                     var data = response.data;
                     var items = JSON.parse(data.result.formSchema);
-                    for (var i = 0; i < items.length; i++) {
-                        $builder.addFormObject("default", items[i]);
+                    $scope.formName = data.result.name;
+                    if ($builder.forms["default"].length !== items.length) {
+                        for (var i = 0; i < items.length; i++) {
+                            $builder.addFormObject("default", items[i]);
+                        }
                     }
                 });
 
@@ -51,6 +54,14 @@ angular
                 return $validator
                     .validate($scope, "default")
                     .success(function () {
+                        $http.post(baseApiUrl + "/forms/answer",
+                            {
+                                Answer: JSON.stringify($scope.input),
+                                FormId: $routeParams.id
+                            }).then(function (response) {
+                                console.log(response);
+                                alert("Sent your form successfully");
+                            });
                         return console.log("success");
                     })
                     .error(function () {
@@ -71,6 +82,7 @@ angular
             $scope.input = [];
             $scope.defaultValue = {};
             $scope.formUrl = '';
+            $scope.answerUrl = '';
             $scope.isSuccess = false;
             $scope.formName = '';
 
@@ -167,7 +179,18 @@ angular
     ])
     .controller("FormAnswersController",
     [
-        '$scope', function ($scope) {
-
+        '$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+            $scope.answers = [];
+            $scope.columns = [];
+            $http.get(baseApiUrl + "/forms/getanswers/" + $routeParams.key)
+                .then(function (response) {
+                    var answers = response.data.result;
+                    for (var i = 0; i < answers.length; i++) {
+                        $scope.answers.push(JSON.parse(answers[i].answer));
+                    }
+                    if ($scope.answers.length > 0) {
+                        $scope.columns = $scope.answers[0];
+                    }
+                });
         }
     ]);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BuilderForm.Data.Entities;
 using BuilderForm.Repository;
@@ -8,10 +9,12 @@ namespace BuilderForm.DataService.Implementations
 {
     public class FormAnswerService : IFormAnswerService
     {
+        private readonly IRepository<Form> formRepository;
         private readonly IRepository<FormAnswer> repository;
-        public FormAnswerService(IRepository<FormAnswer> repository)
+        public FormAnswerService(IRepository<Form> formRepository, IRepository<FormAnswer> repository)
         {
             this.repository = repository;
+            this.formRepository = formRepository;
         }
 
         public bool Add(FormAnswer formAnswer)
@@ -32,9 +35,12 @@ namespace BuilderForm.DataService.Implementations
             return repository.GetById(id);
         }
 
-        public IEnumerable<FormAnswer> GetFormAnswersByFormId(Guid formId)
+        public IEnumerable<FormAnswer> GetFormAnswersByKey(Guid key)
         {
-            return repository.WhereWithDefault<int>(x => x.FormId == formId);
+            var form = formRepository.SingleWithDefault<Guid>(x => x.Key == key, x => x.FormAnswers);
+            var answers= form.FormAnswers.ToList();
+            answers.ForEach(x => { x.Form = null; });
+            return answers;
         }
 
         public bool Update(FormAnswer formAnswer)

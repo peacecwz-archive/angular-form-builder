@@ -6,7 +6,7 @@
 <div ng-controller="FormController">
 
 	<div class="row">
-		<h2>Form</h2>
+		<h2>{{formName}}</h2>
 		<hr>
 		<form class="form-horizontal">
 			<div ng-model="input" fb-form="default" fb-default="defaultValue"></div>
@@ -16,11 +16,5 @@
 				</div>
 			</div>
 		</form>
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" ng-model="isShowScope" ng-init="isShowScope=true" /> Show scope
-			</label>
-		</div>
-		<pre ng-if="isShowScope">{{input}}</pre>
 	</div>
 </div>

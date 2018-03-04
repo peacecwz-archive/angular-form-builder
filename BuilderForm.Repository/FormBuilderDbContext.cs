@@ -11,7 +11,7 @@ namespace BuilderForm.Repository
         public FormBuilderDbContext(DbContextOptions<FormBuilderDbContext> options)
             : base(options)
         {
-
+            
         }
 
         public DbSet<Form> Forms { get; set; }

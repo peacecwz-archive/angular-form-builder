@@ -10,7 +10,7 @@
 		<h1>Form Builder</h1>
 		<hr>
 
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
 					<h3 class="panel-title pull-left" style="padding-top: 7.5px;">
@@ -49,15 +49,34 @@
 						</button>
 					</div>
 					<div class="row" ng-if="isSuccess">
-						Created Successfull<br />
-						<pre>{{formUrl}}</pre>
+						<table>
+							<thead>
+								<tr>
+									<th colspan="2">Created Successfull</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Form Url: </td>
+									<td>
+										<pre>{{formUrl}}</pre>
+									</td>
+								</tr>
+								<tr>
+									<td>Answer List (Secret Url): </td>
+									<td>
+										<pre>{{answerListUrl}}</pre>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
 					<h3 class="panel-title pull-left">Form Components</h3>

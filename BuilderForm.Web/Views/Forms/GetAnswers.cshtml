@@ -1,7 +1,25 @@
 ﻿
 @{
-    ViewData["Title"] = "GetAnswers";
+	ViewData["Title"] = "GetAnswers";
 }
 
-<h2>GetAnswers</h2>
-
+<div ng-controller="FormAnswersController">
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th ng-repeat="column in columns">
+						{{column.label}}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="answer in answers">
+					<td ng-repeat="column in answer">
+						{{column.value}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
