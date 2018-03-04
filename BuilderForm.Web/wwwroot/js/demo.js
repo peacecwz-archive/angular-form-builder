@@ -35,7 +35,17 @@ angular
     [
         '$scope', '$builder', '$validator', '$http', '$routeParams',
         function ($scope, $builder, $validator, $http, $routeParams) {
+            $scope.form = $builder.forms["default"];
+            $scope.input = [];
 
+            $http.get(baseApiUrl + "/forms/get/" + $routeParams.id)
+                .then(function (response) {
+                    var data = response.data;
+                    var items = JSON.parse(data.result.formSchema);
+                    for (var i = 0; i < items.length; i++) {
+                        $builder.addFormObject("default", items[i]);
+                    }
+                });
 
             return ($scope.submit = function () {
                 return $validator

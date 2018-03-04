@@ -43,7 +43,10 @@ namespace BuilderForm.API.Controllers
         [HttpGet]
         public IActionResult Get(Guid? id)
         {
-            return Ok();
+            if (!id.HasValue) return BadRequest();
+            var form = formService.GetFormById(id.Value);
+            form.Key = Guid.Empty;
+            return Ok(form);
         }
     }
 }
