@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace FormBuilder.API
 {
@@ -28,6 +29,10 @@ namespace FormBuilder.API
             services.AddRepository(Configuration.GetConnectionString("FormBuilderConnectionString"));
             services.AddDataServices();
             services.AddCors();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info() { Title = "Angular Form Builder API", Version = "v1" });
+            });
             services.AddMvc();
         }
 
@@ -38,8 +43,14 @@ namespace FormBuilder.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
 
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogApp API v1");
+            });
             app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseMiddleware<Middlewares.ExceptionMiddleware>();
 
             app.UseMvc();
         }
