@@ -31,10 +31,11 @@ namespace BuilderForm.API.Controllers
             {
                 FormSchema = model.FormSchema,
                 Name = model.FormName,
-                Url = model.FormName.GetFriendlyUrl()
+                Url = model.FormName.GetFriendlyUrl(),
+                Key = Guid.NewGuid()
             };
             if (formService.Add(form))
-                return Ok(form.Id);
+                return Ok(form);
             return BadRequest();
         }
 

@@ -8,19 +8,19 @@ namespace BuilderForm.Web.Controllers
 {
     public class FormsController : Controller
     {
-        public IActionResult Index()
+        public PartialViewResult Index()
         {
-            return View();
+            return PartialView();
         }
 
-        public IActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView();
         }
 
-        public IActionResult GetAnswers()
+        public PartialViewResult GetAnswers()
         {
-            return View();
+            return PartialView();
         }
     }
 }
