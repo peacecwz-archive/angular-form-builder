@@ -1,6 +1,5 @@
-var isLoaded = false;
-var baseUrl = 'http://localhost:51468/';
-var baseApiUrl = 'http://localhost:50730/api/v1';
+var baseUrl = window.location.protocol + '//angular-form-builder.azurewebsites.net/';
+var baseApiUrl = window.location.protocol + '//angular-form-builder-api.azurewebsites.net/api/v1';
 var config = {
     headers: {
         'Content-Type': 'application/json'
@@ -37,7 +36,7 @@ angular
         function ($scope, $builder, $validator, $http, $routeParams) {
             $scope.input = [];
             $scope.formName = "Form";
-            $scope.title = $scope.formName; 
+            $scope.title = $scope.formName;
             $http.get(baseApiUrl + "/forms/get/" + $routeParams.id)
                 .then(function (response) {
                     var data = response.data;
