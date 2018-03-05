@@ -26,11 +26,22 @@ dotnet restore
 
 2. Change connection string of Database (Project: FormBuilder.API, File: appsettings.Development.json, Line: 3)
 
-3. (Optinal) If you want to use change Database Provider to MS SQL, MySQL etc... You can change on Startup.cs File (Line: 28)
+3. (Optinal) If you want to use change Database Provider to MS SQL, MySQL etc... You can change on FormBuilder.Repository/Extensions/DIExtensions.cs File (Line: 28)
 
 ```
     //For Microsoft SQL Server
-    services.AddDbContext<AktuelDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AktuelDbConnection"), opt => opt.MigrationsAssembly("AktuelListesi.API")), contextLifetime: ServiceLifetime.Singleton, optionsLifetime: ServiceLifetime.Singleton);
+    services.AddDbContext<FormBuilderDbContext>(options =>
+            {
+                options.UseNpgsql(connectionString,
+                    builder => builder.MigrationsAssembly("FormBuilder.API"));
+            });
+```
+
+3.1 Delete Migrations Folder
+
+3.2 Create New Migrations for SQL Server or another DB Providers
+```
+dotnet ef migrations add InitDb
 ```
 
 4. Run EF Core Migrations
@@ -39,7 +50,13 @@ dotnet restore
 dotnet ef database update
 ```
 
-5 Run the project and Enjoy! :bomb:
+5. Change Client Url and API Url in Client App (Project: FormBuilder.Web, File: wwwroot/js/demo.js, Line 2-3)
+```
+var baseUrl = 'http://localhost:51468/';
+var baseApiUrl = 'http://localhost:50730/api/v1';
+```
+
+6. Run the project and Enjoy! :bomb:
 
 ```
 dotnet run
