@@ -1,6 +1,6 @@
 # Angular Form Builder
 
-Create your form dynamically ang share your form to people
+Create your form dynamically and share your form to people
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/peacecwz/angular-form-builder)
 
