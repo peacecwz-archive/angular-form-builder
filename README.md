@@ -32,7 +32,7 @@ dotnet restore
     //For Microsoft SQL Server
     services.AddDbContext<FormBuilderDbContext>(options =>
             {
-                options.UseNpgsql(connectionString,
+                options.UseSqlServer(connectionString,
                     builder => builder.MigrationsAssembly("FormBuilder.API"));
             });
 ```
